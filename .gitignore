@@ -36,3 +36,5 @@ config.yaml
 # Test outputs
 .coverage
 htmlcov/
+
+output/
