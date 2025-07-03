@@ -1,9 +1,23 @@
 import os
 
 TEXT_FILE_EXTENSIONS = {
-    ".py", ".txt", ".md", ".json", ".yaml", ".yml", ".xml", ".html", ".css", ".js", ".csv"
+    ".py", ".txt", ".md", ".json", ".yaml", ".yml", ".xml", ".html", ".css", ".js", ".csv",
+    ".java", ".sh", ".sql", ".kt", ".kts", ".cs", ".log", ".ini", ".properties", ".bat", ".bkp",
+    ".dockerfile", ".jsx", ".ts", ".tsx", ".javadoc", ".groovy", ".pgsql", ".patch", ".gradle",
+    "",  # 无扩展名的文件
+    ".config", ".webapp", ".gml", ".svg", ".map", ".rb", ".scss", ".vm", ".geojson", ".mf",
+    ".jrxml", ".xsl", ".hbm", ".sessionfactorybuilderfactory", ".toolprovider", ".hbs", ".mjs",
+    ".sample", ".pot", ".po", ".vue", ".less", ".styl", ".stylus", ".coffee", ".pug", ".jade",
+    ".ejs", ".handlebars", ".mustache", ".sass", ".htm", ".markdown", ".cfg", ".cmd", ".php",
+    ".pl", ".cgi", ".asp", ".aspx", ".cshtml", ".jsp", ".jspx", ".h2", ".hsql"
 }
-TEXT_FILE_NAMES = {"Dockerfile", "Makefile", ".gitignore", "README", "README.md"}
+
+TEXT_FILE_NAMES = {
+    # 原始文件名
+    "Dockerfile", "Makefile", ".gitignore", "README", "README.md",
+    # 新增文件名
+    "factories", "conf", "data", "lst", "dat", "jrxml", "ftl"
+}
 
 def is_text_file(file_path):
     _, ext = os.path.splitext(file_path)
