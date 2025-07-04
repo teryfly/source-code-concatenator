@@ -14,7 +14,10 @@ def generate_project_document(root_path: str) -> str:
 
     # File Contents
     file_contents = []
-    for dirpath, _, filenames in os.walk(root_path):
+    for dirpath, dirnames, filenames in os.walk(root_path):
+        # 过滤掉以点开头的隐藏文件夹
+        dirnames[:] = [d for d in dirnames if not d.startswith('.')]
+        
         for filename in filenames:
             full_path = os.path.join(dirpath, filename)
             if not is_text_file(full_path):
