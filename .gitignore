@@ -39,3 +39,5 @@ htmlcov/
 
 output/
 input/
+
+*.sql
