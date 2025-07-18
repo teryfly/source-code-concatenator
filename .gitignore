@@ -10,6 +10,11 @@ __pycache__/
 venv/
 .env/
 .venv/
+public/
+.env.local/
+assets/
+src/assets/
+node_modules/
 
 # Logs
 *.log
@@ -25,6 +30,8 @@ build/
 dist/
 *.egg-info/
 *.egg
+*.svg
+*.zip
 
 # Config files (if not tracked)
 config.yaml
@@ -41,3 +48,4 @@ output/
 input/
 
 *.sql
+.git/
