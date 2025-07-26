@@ -33,3 +33,7 @@ pip install /path/to/source-code-concatenator
 ```
 2、确保传递给 get_project_document() 的是绝对路径
 3、跨平台路径处理：使用 os.path.abspath(project_path)
+
+
+**注意：**
+当以 API 的方式被其它项目（如程序B）调用时，优先使用调用程序项目根目录下的 .gitignore 文件（即 import 本库的调用方根目录需要增加此文件）。

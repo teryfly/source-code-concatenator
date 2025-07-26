@@ -1,54 +1,53 @@
 import os
 
-def build_tree(path, base_path, prefix="", ignore_func=None):
+def build_tree(path, base_path, prefix="", ignore_func=None, debug=None):
     """构建目录树，支持忽略规则"""
     if ignore_func is None:
         ignore_func = lambda rel_path: False
 
-    # 计算当前路径的相对路径
+    if debug is None:
+        def debug(msg): pass
+
     rel_path = os.path.relpath(path, base_path)
     if rel_path == '.':
         rel_path = ''
-    
-    # 检查当前目录本身是否被忽略
-    if rel_path and ignore_func(rel_path):
+
+    ignored = rel_path and ignore_func(rel_path)
+    debug(f"TREE CHECK DIR: {rel_path or '.'} IGNORED={ignored}")
+    if rel_path and ignored:
         return []
 
-    entries = []
     try:
-        # 获取并过滤条目
         all_entries = os.listdir(path)
-        filtered_entries = []
-        for entry in all_entries:
-            # 计算条目的相对路径
-            entry_rel = os.path.join(rel_path, entry) if rel_path else entry
-            
-            # 检查条目是否被忽略
-            if ignore_func(entry_rel):
-                continue
-                
-            filtered_entries.append(entry)
-        
-        # 排序：目录在前，文件在后，按字母顺序
-        entries = sorted(
-            filtered_entries,
-            key=lambda x: (not os.path.isdir(os.path.join(path, x)), x.lower())
-        )
     except PermissionError:
         return []
 
+    filtered_dirs = []
+    filtered_files = []
+
+    for entry in all_entries:
+        entry_path = os.path.join(path, entry)
+        entry_rel = os.path.join(rel_path, entry) if rel_path else entry
+        ignored = ignore_func(entry_rel)
+        debug(f"TREE ENTRY: {entry_rel} IGNORED={ignored}")
+        if ignored:
+            continue
+        if os.path.isdir(entry_path):
+            filtered_dirs.append(entry)
+        else:
+            filtered_files.append(entry)
+
+    entries = sorted(filtered_dirs, key=lambda x: x.lower()) + sorted(filtered_files, key=lambda x: x.lower())
+
     lines = []
+    total = len(entries)
     for idx, entry in enumerate(entries):
         full_path = os.path.join(path, entry)
-        connector = "└── " if idx == len(entries) - 1 else "├── "
+        connector = "└── " if idx == total - 1 else "├── "
         lines.append(prefix + connector + entry)
-
         if os.path.isdir(full_path):
-            extension = "    " if idx == len(entries) - 1 else "│   "
+            extension = "    " if idx == total - 1 else "│   "
             child_rel = os.path.join(rel_path, entry) if rel_path else entry
-            
-            # 递归构建子树（仅当目录未被忽略）
-            if not ignore_func(child_rel):
-                lines.extend(build_tree(full_path, base_path, prefix + extension, ignore_func))
+            lines.extend(build_tree(full_path, base_path, prefix + extension, ignore_func, debug))
 
     return lines
