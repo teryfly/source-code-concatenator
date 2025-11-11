@@ -29,7 +29,7 @@ except Exception as e:
 
 ```bash
 # 在程序B的环境中安装A
-pip install /path/to/source-code-concatenator
+pip install E:\Projects\GitHubProjects\source-code-concatenator
 ```
 2、确保传递给 get_project_document() 的是绝对路径
 3、跨平台路径处理：使用 os.path.abspath(project_path)

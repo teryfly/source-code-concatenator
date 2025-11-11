@@ -11,7 +11,7 @@ TEXT_FILE_EXTENSIONS = {
     ".jrxml", ".xsl", ".hbm", ".sessionfactorybuilderfactory", ".toolprovider", ".hbs", ".mjs",
     ".sample", ".pot", ".po", ".vue", ".less", ".styl", ".stylus", ".coffee", ".pug", ".jade",
     ".ejs", ".handlebars", ".mustache", ".sass", ".htm", ".markdown", ".cfg", ".cmd", ".php",
-    ".pl", ".cgi", ".asp", ".aspx", ".cshtml", ".jsp", ".jspx", ".h2", ".hsql",
+    ".pl", ".cgi", ".asp", ".aspx", ".cshtml", ".jsp", ".jspx", ".h2", ".hsql",".prisma", ".nim", ".r", ".rmd"
 }
 
 TEXT_FILE_NAMES = {
