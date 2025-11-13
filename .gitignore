@@ -15,6 +15,7 @@ public/
 assets/
 src/assets/
 node_modules/
+coverage/
 
 # Logs
 *.log
